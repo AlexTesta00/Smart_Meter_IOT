@@ -79,6 +79,14 @@ def get_current_time_measure():
     """
     return time.strftime('%H:%M:%S', time.localtime())
 
+
+def store_data(file_name, data):
+    fout = open(file_name, 'w')
+    if fout.write(data):
+        return True
+    fout.close()
+    return False
+
 def get_current_message_format(ip_address, separator = ' - '):
     return str(ip_address) + separator + str(get_current_time_measure()) + separator + str(get_data_from_IOT()[0]) + 'C°' + separator + str(get_data_from_IOT()[1]) + '%'
 

@@ -81,3 +81,5 @@ def get_current_time_measure():
 
 def get_current_message_format(ip_address, separator = ' - '):
     return str(ip_address) + separator + str(get_current_time_measure()) + separator + str(get_data_from_IOT()[0]) + 'C°' + separator + str(get_data_from_IOT()[1]) + '%'
+
+    

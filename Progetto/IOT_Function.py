@@ -81,8 +81,8 @@ def get_current_time_measure():
 
 
 def store_data(file_name, data):
-    fout = open(file_name, 'w')
-    if fout.write(data):
+    fout = open(file_name, 'a')
+    if fout.write('\n' + data):
         return True
     fout.close()
     return False

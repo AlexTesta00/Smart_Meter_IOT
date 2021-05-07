@@ -5,7 +5,7 @@
 """
 
 import socket as sk
-import time as tm
+import Gatway_Utilities as gt
 
 port = 10000 # The number of the server port
 buffer_size = 64 # The size of the buffer for the message from client
@@ -18,24 +18,6 @@ ip_address_to_central_server = '10.10.10.2' # This is the interface ip that comu
 buffer_size = 256 # The buffer dimension to send data in tcp connection
 server_port_tcp = 1100 # The number of the server port to tcp conneciton
 
-
-def tcp_send_message(message):
-    
-    tcp_socket = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
-    
-    try:
-        tcp_socket.connect(('localhost', server_port_tcp))
-    except Exception as data:
-        print(' fail : ', data)
-        print(' failed connection')
-        tcp_socket.close()
-    
-    tcp_socket.send(message.encode('utf8'))
-    response = tcp_socket.recv(server_port_tcp)    
-    print(' Central Server Response : ' + response.decode('utf8'))
-    
-    tcp_socket.close()
-    return
 
 # Create UDP socket
 UDP_Socket = sk.socket(sk.AF_INET, sk.SOCK_DGRAM)
@@ -62,15 +44,21 @@ while True:
         print( ' Dati inviati correttamente')
         send_data = UDP_Socket.sendto(okay_message.encode(), address)
         
+        # Increment the counter of the packets
+        recived_packet += 1
+        
+        # Replace the ip, because gatway can send the message to central server whit different ip interface
+        all_data += '\n'+ 'IOT : ' + str(recived_packet) + ' Data : ' + gt.replace_ip_in_string(ip_address_to_central_server, data.decode('utf8'))
+        
         # When gatway recive all data, he clear the data cache and init the packet counter
         if recived_packet == 4:
-            recived_packet = 0
-            print(' Invio i dati al server tcp')
-            tcp_send_message(all_data)
+            print(' Send data to central server')
+            # This part of code send with tcp connection the packet to central server
+            gt.tcp_send_message(server_port_tcp, all_data)
+            # And clear the data alredy inviated 
             all_data = ''
-        else:
-            all_data += '\n'+ 'IOT : ' + str(recived_packet) + ' Data : ' + data.decode('utf8')
-            recived_packet += 1
+            # Clear the counter of the packet alredy inviated
+            recived_packet = 0
             
     else:
         print(' Dati non corretti')

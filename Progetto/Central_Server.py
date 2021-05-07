@@ -28,20 +28,29 @@ server_socket.listen(1)
 
 while True:
     
-    print(' Wait Connection...')
+    print('\nWait Connection...')
     # Wait the connection from client
     connection_socket, addr = server_socket.accept()
-    print(' Connected ')
     
+    # The Client was connected
+    print('Connected')
+    print('\n')
+    
+    # Try to recive data
     try:
         message = connection_socket.recv(buffer_size)
+        
+        # If message have long > 0, take data, store it, and send reponse to clinet
         if message :
-            print(' ' + message.decode('utf8'))
+            print('Recived Data from : %s \n%s \nBytes : %s' % (addr, message.decode('utf8'), len(message)))
+            # Send the reponse to client
             connection_socket.send(okay_message.encode('utf8'))
+            # Close connection
             connection_socket.close()
-            print(' Close connection')
+            print('Close connection')
     except IOError:
+        # If the data are compromised, send faillure to client and close connection
         connection_socket.send(failed_message.encode('utf8'))
         connection_socket.close()
-        print(' Close connection')
+        print('Close connection')
         

@@ -43,6 +43,7 @@ while True:
         # If message have long > 0, take data, store it, and send reponse to clinet
         if message :
             print('Recived Data from : %s \n%s \nBytes : %s' % (addr, message.decode('utf8'), len(message)))
+            print('Buffer Size : %s' % str(buffer_size))
             # Send the reponse to client
             connection_socket.send(okay_message.encode('utf8'))
             # Close connection

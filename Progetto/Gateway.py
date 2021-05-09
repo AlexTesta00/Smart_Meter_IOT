@@ -36,12 +36,12 @@ while True:
     
     # Data reciver
     print(' Recived data...\n Bytes : %s \n Ip_Sender : %s' % (len(data), address))
+    print(' Buffer Size : %s' % str(buffer_size))
     print (' Message : ' + data.decode('utf8'))
     
     # Control data
     # If the gateway recive all 4 packet, he send packet to central server
     if data:
-        print( ' Dati inviati correttamente')
         send_data = UDP_Socket.sendto(okay_message.encode(), address)
         
         # Increment the counter of the packets
@@ -61,5 +61,5 @@ while True:
             recived_packet = 0
             
     else:
-        print(' Dati non corretti')
+        print(' Uncorrect data')
         send_data = UDP_Socket.sendto(failed_message.encode(), address)

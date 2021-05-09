@@ -90,7 +90,7 @@ def tcp_send_message(server_port_tcp, message, path_log_file='GatwayLog/log.txt'
         t_end = tm.time()
         # Print the data 
         print(' Central Server Response : ' + response.decode('utf8'))
-        print(' Speed : %s' % str(t_end - t_start)[0:4] + 'ms') # Take only 2 part of mantissa
+        print(' Speed : %s' % str(t_end - t_start)[0:5] + 'ms') # Take only 2 part of mantissa
         
         # Close connection
         tcp_socket.close()

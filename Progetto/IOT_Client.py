@@ -17,13 +17,14 @@ log_file_name = 'IOT_Log/log.txt' # This is the file name used to store data whe
 connecition_failed_error = colors.colored('Failed Conneciton', 'red') # The message to user that coumincate an error gatway
 online_iot_text = colors.colored('IOT System Online', 'green') # Used to comunicate to user that the system is online
 offline_iot_text = colors.colored('IOT system offline :(', 'red') # Used to comunicate that the IOT system is offline
+number_iot = 4 # This is the number of the iot
 
 # Used to comunicate whit user that the system is online
 print(online_iot_text)
 
 while True:
 
-    for steps in range(4):
+    for steps in range(number_iot):
         
         try:
             
@@ -56,7 +57,7 @@ while True:
             print('IOT ' + str(steps) + ' server response : ' + data.decode('utf8'))
             
             # Calculate the total speed for send a udp packet to Gatway from IOT
-            print('Speed : %s' % str(t_end - t_start)[0:5] + 'ms') # Take only 2 part of mantissa
+            print('Speed : %s' % str(t_end - t_start)[0:4] + 'ms') # Take only 2 part of mantissa
     
             # If the message failed, the data can store in a log file for not lost the data
             if data.decode('utf8') == 'Failed':

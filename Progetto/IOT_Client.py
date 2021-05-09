@@ -14,11 +14,11 @@ my_ip = '192.168.1.1' # The local interface ip address
 buffer_size = 64 # The size of the buffer for the message
 measure_time = 3 # This variable simulate (in second) the time that the IOT send data to gateway
 log_file_name = 'IOT_Log/log.txt' # This is the file name used to store data when gatway connection failed
-connecition_failed_error = colors.colored('Failed Conneciton', 'red') # The message whit user that coumincate an error in comunication whit gatway
-online_iot_text = colors.colored('IOT System Online', 'green') # Used to comunicate whit user that the sysem is online
+connecition_failed_error = colors.colored('Failed Conneciton', 'red') # The message to user that coumincate an error gatway
+online_iot_text = colors.colored('IOT System Online', 'green') # Used to comunicate to user that the system is online
 offline_iot_text = colors.colored('IOT system offline :(', 'red') # Used to comunicate that the IOT system is offline
 
-# Used to comunicate whit user that the sysem is online
+# Used to comunicate whit user that the system is online
 print(online_iot_text)
 
 while True:

@@ -52,6 +52,7 @@ while True:
     except IOError:
         # If the data are compromised, send faillure to client and close connection
         connection_socket.send(failed_message.encode('utf8'))
+        # Close connecition
         connection_socket.close()
         print('Close connection')
         

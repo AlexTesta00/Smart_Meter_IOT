@@ -30,17 +30,19 @@ print(' Starting work on : %s \n Port : %s' % server_address)
 UDP_Socket.bind(server_address)
 
 while True:
-    # Wat data from client
+    # Wait data from client
     print('\n\r Wating data...')
     data, address = UDP_Socket.recvfrom(buffer_size)
     
     # Data reciver
     print(' Recived data...\n Bytes : %s \n Ip_Sender : %s' % (len(data), address))
+    # Print the size of the udp buffer
     print(' Buffer Size : %s' % str(buffer_size))
+    # Print the message recived
     print (' Message : ' + data.decode('utf8'))
     
     # Control data
-    # If the gateway recive all 4 packet, he send packet to central server
+    # If the gateway recive all 4 packets, he send packets to central server
     if data:
         send_data = UDP_Socket.sendto(okay_message.encode(), address)
         
@@ -61,5 +63,6 @@ while True:
             recived_packet = 0
             
     else:
+        # Send a faillure message, if the data recived are uncorrect
         print(' Uncorrect data')
         send_data = UDP_Socket.sendto(failed_message.encode(), address)

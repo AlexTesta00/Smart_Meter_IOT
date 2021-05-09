@@ -81,6 +81,22 @@ def get_current_time_measure():
 
 
 def store_data(file_name, data):
+    """
+    Description
+    -----------
+    Use to store data in file
+    
+    Parameters:
+        string:
+            Represent the path of the file
+        
+        string:
+            Represent the data to store in file
+    Return
+    ------
+    boolean
+            true if the data are print in file
+    """
     fout = open(file_name, 'a')
     if fout.write('\n' + data):
         return True
@@ -88,6 +104,22 @@ def store_data(file_name, data):
     return False
 
 def get_current_message_format(ip_address, separator = ' - '):
+    """
+    Description
+    -----------
+    Use to incapsulate data in correct packet
+    
+    Parameters:
+        string:
+            Represent the ip address of the current iot
+        
+        string:
+            Is use to separate the data
+    Return
+    ------
+    string
+            the correctly message to send
+    """
     return str(ip_address) + separator + str(get_current_time_measure()) + separator + str(get_data_from_IOT()[0]) + 'C°' + separator + str(get_data_from_IOT()[1]) + '%'
 
     
